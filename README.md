@@ -5,6 +5,7 @@
 ## Project Introduction
 
 这是一个简单的电脑商城系统，后端使用 **Spring Boot**、**MyBatis** 和 **MySQL**（通过 Navicat 连接），前端使用 **jQuery**、**AJAX** 和 **Bootstrap 3**。该系统允许用户浏览商品，进行用户注册、登录，并提供个人资料管理、购物车、订单生成等功能。
+
 This is a simple computer store system. The backend uses **Spring Boot**, **MyBatis**, and **MySQL** (connected via Navicat), while the frontend uses **jQuery**, **AJAX**, and **Bootstrap 3**. This system allows users to browse products, register and log in, and provides personal profile management, shopping cart, and order generation features.
 
 ## 功能概述
