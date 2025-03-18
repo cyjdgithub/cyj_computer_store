@@ -1,5 +1,5 @@
-# 电脑商城项目
-# Computer Store Project
+# 电脑商城项目（前后端不分离）
+# Computer Store Project（non-separation front-end and back-end project.）
 
 ## 项目简介
 ## Project Introduction
