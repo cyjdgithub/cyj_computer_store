@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncy.store.mapper.AddressMapper">
+    <resultMap id="AddressEntityMap" type="com.ncy.store.entity.Address">
+        <id column="aid" property="aid"></id>
+        <result column="province_code" property="provinceCode"></result>
+        <result column="province_name" property="provinceName"></result>
+        <result column="city_name" property="cityName"></result>
+        <result column="city_code" property="cityCode"></result>
+        <result column="area_name" property="areaName"></result>
+        <result column="is_default" property="isDefault"></result>
+        <result column="created_user" property="createdUser"></result>
+        <result column="created_time" property="createdTime"></result>
+        <result column="modified_user" property="modifyUser"></result>
+        <result column="modified_time" property="modifyTime"></result>
+    </resultMap>
+
+    <!--新增收货地址-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="aid">
+        insert into t_address (uid, name, province_name, province_code, city_name, city_code, area_name, area_code, zip,
+        address, phone, tel, tag, is_default, created_user, created_time, modified_user,
+        modified_time)
+        values (#{uid}, #{name}, #{provinceName}, #{provinceCode}, #{cityName}, #{cityCode}, #{areaName},
+        #{areaCode}, #{zip}, #{address}, #{phone}, #{tel}, #{tag}, #{isDefault}, #{createdUser},
+        #{createdTime}, #{modifyUser}, #{modifyTime})
+    </insert>
+
+    <select id="countByUid" resultType="java.lang.Integer">
+        select count(*)
+        from t_address
+        where uid = #{uid}
+    </select>
+    
+    <select id="findAddressByUid" resultMap="AddressEntityMap">
+        SELECT *
+        FROM t_address
+        where uid = #{uid}
+        order by is_default DESC, created_time DESC
+    </select>
+
+    <update id="updateNonDefault">
+        UPDATE t_address
+        SET is_default = 0
+        WHERE uid=#{uid}
+    </update>
+
+    <update id="updateDefaultByAid">
+        UPDATE t_address
+        SET is_default = 1, modified_user = #{modifyUser}, modified_time = #{modifyTime}
+        where aid=#{aid}
+    </update>
+
+    <select id="findByAid" resultType="com.ncy.store.entity.Address">
+        select * from t_address where aid=#{aid}
+    </select>
+
+    <delete id="deletedByAid">
+        delete from t_address where aid=#{aid}
+    </delete>
+
+    <select id="findLastModified" resultMap="AddressEntityMap">
+        select * from t_address
+        where uid=#{uid}
+        order by modified_time DESC LIMIT 0,1
+    </select>
+
+ <!--
+    <update id="updateNonDefault">
+        UPDATE t_address
+        SET is_default = 0
+        WHERE uid=#{uid}
+    </update>
+
+    <select id="findByAid" resultType="AddressEntityMap">
+        select * from t_address where aid=#{aid}
+    </select>
+
+    <update id="updateDefaultByAid">
+        UPDATE t_address
+        SET is_default = 1, modified_user = #{modifyUser}, modified_time = #{modifyTime}
+        where aid=#{aid}
+    </update>
+
+-->
+            
+
+
+
+
+</mapper>
